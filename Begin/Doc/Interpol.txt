@@ -1,0 +1,18 @@
+﻿name= 'Stas'
+age= 52
+
+print('Hello, %s!\n You are %d years old, aren\'t you?' % (name, age))# на самом деле, вместо %d можно ждать строку, int проходит и работает
+# если age= 'fuck' -->TypeError: %d format: a number is required, not str
+
+print('Hello, {1}!\n You are {0} years old, aren\'t you?'.format (age, name))
+print('Hello, {1}!\n You are {0} years old, aren\'t you?'.format ('52', 'stas'))
+print('Hello, {name}!\n You are {age} years old, aren\'t you?'.format (age= 52, name= 'staS'))
+print('Hello, {hwo}!\n You are {howmach} years old, aren\'t you?'.format (howmach= age, hwo= name))
+
+human= {'name': 'Stas', 'age': 52}
+print('Hello, {person[name]}!\n You are {person[age]} years old, aren\'t you?'.format (person= human))
+
+input_str= 'Stas'
+print('{0:*^11}'.format(input_str))# {index: заполняющий символ, центровка >\ <\ ^, кол-во символов в строке }- разделителя между аргументами нет!
+# если не центруется ровно, сдвигает слово влево
+print('{0: >55}'.format(input_str))# пробел - по дефолту

@@ -1,0 +1,26 @@
+>>> dir(tkinter)
+['ACTIVE', 'ALL', 'ANCHOR', 'ARC', 'BASELINE', 'BEVEL', 'BOTH', 'BOTTOM', 'BROWS
+E', 'BUTT',  'CASCADE', 'CENTER', 'CHAR', 'CHECKBUTTON', 'CHORD', 'COMMAND', 'CURRENT', 'DISABLED', 'DOTBOX','E', 'END', 'EW', 'EXCEPTION', 'EXTENDED',, 'FIRST', 'FLAT', 'FALSE','GROOVE', 'Grid', 'HIDDEN', 'HORIZONTAL', 'INSERT', 'INSIDE', 'LAST', 'LEFT', 'N', 'NE', 'NO', 'NONE', 'NORMAL', 'NS', 'NSEW', 'NUMERIC', 'NW', 'MITER', 'MOVETO', 'MULTIPLE', 'PAGES', 'PIESLICE', 'PROJECTING', 'OFF', 'ON', 'OUTSIDE', 'RADIOBUTTON', 'RAISED', 'READABLE', 'RIDGE', 'RIGHT', 'ROUND', 'S', 'SCROLL', 'SE', 'SEL', 'SEL_FIRST', 'SEL_LAST', 'SEPARATOR', 'SINGLE', 'SOLID', 'SUNKEN', 'SW', 'TOP', 'TRUE', 'UNDERLINE', 'UNITS', 'VERTICAL', 'W', 'WORD', 'WRITABLE', 'X', 'Y', 'YES'
+
+ 'BaseWidget', 'BitmapImage', 'BooleanVar', 'Button','CallWrapper', 'Canvas', 'Checkbutton', 'DoubleVar',  'Entry', 'Event', 'EventType', 'Frame', 'Image', 'IntVar', 'Label', 'LabelFrame', 'Listbox', 'Menu',
+ 'Menubutton', 'Message', 'Misc', 'NoDefaultRoot', 'OptionMenu', , 'Pack', 'PanedWindow', 'PhotoImage',
+'Place', 'Radiobutton', 'Scale', 'Scrollbar', 'Spinbox', 'StringVar', 'Tcl', 'TclError', 'TclVersion', 'Text', 'Tk', 'TkVersion', 'Toplevel', 'Variable', 'Widget', 'Wm', 'XView', 'YView'
+
+ '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', '_cnfmerge', '_default_root', '_exit', '_flatten', '_join', '_magic_re', '_setit',
+ '_space_re', '_splitdict', '_stringify', '_support_default_root', '_test','_tkerror', '_tkinter', '_varnum', 'constants', 'enum', 'getboolean', 'getdouble', 'getint', 'image_names', 'image_types',
+ 'mainloop', 're', 'sys', 'wantobjects']
+>>>
+"Наибольшую сложность при работе с PyQt вызвали менеджеры компоновки (отвечают за размещение компонент в окне). Горизонтальные и вертикальные «упаковщики» (QHBoxLayout, QVBoxLayout) при разработке интерфейса с множеством полей и меток использовать достаточно сложно, т.к. приходится постоянно вкладывать один в другой и это вызывает путаницу. Использовать сетку (QGridLayout) также неудобно, т.к. по умолчанию компонент растягивается на всю ячейку и указанные размеры игнорируются. Настройка сетки с помощью указания дополнительных отступов также неудобна, если компонентов много и часть из них должны занимать несколько ячеек. Поэтому был выбран вариант с абсолютным позиционированием (setGeometry). Однако, как известно, это не лучший выбор, т.к. в разных системах установлены разные шрифты, и интерфейс может искажаться (надпись может выйти за пределы элемента).
+
+Одним из выходов может быть использование QT Designer (дизайнер графического интерфейса) при разработке с использованием PyQt."
+
+В отличие от PyQt в Tkinter нет специальных полей для ввода даты. Также не удалось найти такой компонент в различных расширениях Tkinter. Оставалось использовать либо обычное текстовое поле (Entry), либо поле для ввода целых чисел в заданном диапазоне (Spinbox). В случае использования Entry пользователь может вводить дату в одном поле. Однако надо запрограммировать «маску» ввода и желательно возможность автоматической подстановки символа-разделителя (между годом, месяцем и датой). Также придется обрабатывать полученную строку и извлекать из нее год, месяц и день. Компонент Spinbox по идее должен был решать часть этих проблем, поэтому было решено использовать его. В результате поле каждой даты состояло из трех компонентов Spinbox [Приложение 2].
+
+Интерфейс приложения, написанный на Tkinter
+
+Однако, как оказалось, несмотря на то, что Spinbox должен позволять вводить только целые числа, пользователь вполне может вписать в это поле букву (клавиатура на ввод буквы не блокируется). Т.е. обработка подобных ситуаций в Tkinter возложена на программиста.
+
+Количество дней в месяцах разное, также год может быть високосным. Пришлось написать несколько дополнительных функций, изменяющих предельные значения полей Spinbox в зависимости от того, что указано в связанных полях. В результате код программы получился более объемным.
+
+В Tkinter как и в PyQt есть три способа размещения компонентов в окне (pack, grid и place). Был выбран метод grid (сетка), настройки которого, на наш взгляд, оказались более продуманными, чем в аналогичном методе из PyQt. Поэтому «спроектировать» внешний вид окна в Tkinter оказалось проще.
+

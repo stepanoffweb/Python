@@ -1,0 +1,75 @@
+﻿'''Регулярные выражения - это широкоиспользуемый способ описания шаблонов для поиска текста и проверки соответствия текста шаблону и замены подстрок.
+Начало строки =- первое слово
+s= re.sub(r'\s+, '', s, flags= re.UNICODE') == ''.join(s.split())- удаляют пробел во всей строке'''
+import re
+
+#re.match - ищет соответствие шаблону в начале строки
+res= re.match(r'AV', 'AV Uventas AV')
+print(res)
+print(res.start())# начальная позиция найденной строки
+print(res.end())# конечная позиция найденной строки
+print(res.group(0))
+#<_sre.SRE_Match object; span=(0, 2), match='AV'>
+#0
+#2
+#AV
+res = re.search(r'AV', 'AV Uventas AV')
+print (res)
+print(res.group(0))
+#<_sre.SRE_Match object; span=(0, 2), match='AV'>
+#AV
+res= re.match('Uventas', 'AV Uventas AV')
+print(res)
+#None
+res = re.search(r'Analytics', 'AV Analytics Vidhya AV')
+print (res.group(0))
+#Analytics
+res = re.findall(r'AV', 'AV Analytics Vidhya AV')
+print (res)
+#['AV', 'AV']
+res = re.split(r'y', 'Analytics')# (, , [maxsplit=]) по умолчанию - все
+print (res)
+#['Anal', 'tics']
+res = re.split(r'i', 'Analytics Vidhya',maxsplit=1)
+print (res)
+#['Analyt', 'cs Vidhya']
+res = re.sub(r'India', 'the World', 'AV is largest Analytics community of India')
+print (res)
+#AV is largest Analytics community of the World
+pattern = re.compile('AV')
+res = pattern.findall('AV Analytics Vidhya AV')
+print (res)
+['AV', 'AV']
+res = re.findall(r'.', 'AV is largest Analytics community of India')# исключить пробелы: 'w' вместо точки
+print (res)
+#['A', 'V', ' ', 'i', 's', ' ', 'l', 'a', 'r', 'g', 'e', 's', 't', ' ', 'A', 'n', 'a', 'l', 'y', 't', 'i', 'c', 's', ' ', 'c', 'o', 'm', 'm', 'u', 'n', 'i', 't', 'y', ' ', 'o', 'f', ' ', 'I', 'n', 'd', 'i', 'a']
+res = re.findall(r'\w*', 'AV is largest Analytics community of India')#"выдираем" слова
+print (res)
+#['AV', '', 'is', '', 'largest', '', 'Analytics', '', 'community', '', 'of', '', 'India', '']в результат попали пробелы, так как * означает «ноль или более символов»???
+res = re.findall(r'\w+', 'AV is largest Analytics community of India')# Убираем пробелы
+print (res)
+#['AV', 'is', 'largest', 'Analytics', 'community', 'of', 'India']
+res = re.findall(r'^\w+', 'AV is largest Analytics community of India')# вытащим первое слово (как элемент списка)
+print (res)
+#['AV']
+res = re.findall(r'\w+$', 'AV is largest Analytics community of India')
+print (res)
+#['India'] последнее слово
+res = re.findall(r'\w\w', 'AV is largest Analytics community of India')#два символа кроме пробелов из каждого слова
+print (res)
+#['AV', 'is', 'la', 'rg', 'es', 'An', 'al', 'yt', 'ic', 'co', 'mm', 'un', 'it', 'of', 'In', 'di']
+res = re.findall(r'\b\w.', 'AV is largest Analytics community of India')# два символа в начале слов
+print (res)
+#['AV', 'is', 'la', 'An', 'co', 'of', 'In']
+res = re.findall(r'@\w+', 'abc.test@gmail.com, xyz@test.in, test.first@analyticsvidhya.com, first.test@rest.biz')
+print (res)
+#['@gmail', '@test', '@analyticsvidhya', '@rest']
+res = re.findall(r'@\w+.\w+', 'abc.test@gmail.com, xyz@test.in, test.first@analyticsvidhya.com, first.test@rest.biz')#тот же эфект от \S
+print (res)
+['@gmail.com', '@test.in', '@analyticsvidhya.com', '@rest.biz']
+res = re.findall(r'@\S+', 'abc.test@gmail.com, xyz@test.in, test.first@analyticsvidhya.com, first.test@rest.biz')
+print (res)
+#['@gmail.com,', '@test.in,', '@analyticsvidhya.com,', '@rest.biz']
+res = re.findall(r'@(\S+)', 'abc.test@gmail.com, xyz@test.in, test.first@analyticsvidhya.com, first.test@rest.biz')# группируем необходимое в ()
+print(res)
+['gmail.com,', 'test.in,', 'analyticsvidhya.com,', 'rest.biz']

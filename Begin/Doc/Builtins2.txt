@@ -1,0 +1,31 @@
+Python 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 17:00:18) [MSC v.1900 64 bit (AMD6
+4)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> dir(__builtins__)
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'Blocki
+ngIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError
+', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'Conne
+ctionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentErro
+r', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPoint
+Error', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarni
+ng', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError',
+'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundEr
+ror', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplement
+edError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionEr
+ror', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning
+', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'Syn
+taxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutErr
+or', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEnc
+odeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarni
+ng', 'ValueError', 'Warning', 'WindowsError', 'ZeroDivisionError',
+	'__build_class__', '__debug__', '__doc__', '__import__', '__loader__', 
+'__name__', '__package__', '__spec__', 
+	'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'bytearray', 'bytes', 'callable',
+ 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr',
+ 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float',
+ 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash','help', 'hex',
+ 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len','license', 'list',
+ 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 
+'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round',
+ 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super',
+ 'tuple', 'type', 'vars', 'zip']

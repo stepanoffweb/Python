@@ -1,0 +1,17 @@
+﻿>>> help(sum)
+Help on built-in function sum in module builtins:
+sum(iterable, start=0, /)
+    Return the sum of a 'start' value (default: 0) plus an iterable of numbers
+    When the iterable is empty, return the start value.
+    This function is intended specifically for use with numeric values and may
+    reject non-numeric types.
+__________________________________________________________________________________________
+Возвращает сумму значений последовательности (True= 1). Заточена под инты!
+iterable : Объект, поддерживающий итерацию по его элементам. Ожидается, что элементы этого объекта являются числами, но не строками. Если объект пуст, функция вернёт начальное значение (start).
+sum([], 3)  # 3
+sum([1, 2], 3)  # 6
+КАК работает start???
+Идиомы суммирования
+    Для суммирования чисел с плавающей запятой с расширенной точностью используйте math.fsum().
+    Для конкатенации последовательностей, содержащих строки, используйте ''.join(sequence).
+    Для конкатенации нескольких последовательностей можно использовать itertools.chain().

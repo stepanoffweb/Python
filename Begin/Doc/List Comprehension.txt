@@ -1,0 +1,8 @@
+﻿squares= [i**2 for i in range(10)]
+matrix= [[col for col in range(5)] for row in range(10)]
+
+print([num**2 for num in range(10) if num%2==0])# Condition on the iterable
+print([num**2 if num%2==0 else 0 for num in range(10)])# Condition in output expression
+[0, 4, 16, 36, 64]
+[0, 0, 4, 0, 16, 0, 36, 0, 64, 0]
+a = [random.randint(1, 100) for i in range(20) ]# попытка List Comprehension

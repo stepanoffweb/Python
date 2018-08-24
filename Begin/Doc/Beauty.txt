@@ -1,0 +1,12 @@
+﻿>>> import bs4
+>>> dir(bs4)
+['BeautifulSoup', 'BeautifulStoneSoup', 'CData', 'Comment', 'DEFAULT_OUTPUT_ENCO
+DING', 'Declaration', 'Doctype', 'FeatureNotFound', 'NavigableString', 'PageElem
+ent', 'ParserRejectedMarkup', 'ProcessingInstruction', 'ResultSet', 'SoupStraine
+r', 'StopParsing', 'Tag', 'UnicodeDammit', '__all__', '__author__', '__builtins_
+_', '__cached__', '__copyright__', '__doc__', '__file__', '__license__', 
+'__loader__', '__name__', '__package__', '__path__', '__spec__', '__version__',
+ '_s', _soup',
+	'builder', 'builder_registry', 'dammit', 'element', 'os', 're', 'traceback', 'warnings']
+>>>
+#from bs4 import BeautifulSoup

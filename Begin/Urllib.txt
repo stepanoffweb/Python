@@ -1,0 +1,826 @@
+﻿ highly recommend the Requests python package:
+First, it supports a fully restful API
+Regardless of whether GET/POST you never have to encode parameters again, it simply takes a dictionary as an argument and is good to go.
+	userdata = {"firstname": "John", "lastname": "Doe", "password": "jdoe123"}
+	resp = requests.post('http://www.mywebsite.com/user', data=userdata)
+Plus it even has a built in json decoder (again, i know json.loads() isn't a lot more to write, but this sure is convenient):
+	resp.json()
+Or if your response data is just text, use:
+	resp.text
+This is just the tip of the iceberg. This is the list of features from the requests site:
+    International Domains and URLs
+    Keep-Alive & Connection Pooling
+    Sessions with Cookie Persistence
+    Browser-style SSL Verification
+    Basic/Digest Authentication
+    Elegant Key/Value Cookies
+    Automatic Decompression
+    Unicode Response Bodies
+    Multipart File Uploads
+    Connection Timeouts
+    .netrc support
+    List item
+    Python 2.6—3.4
+    Thread-safe.
+
+	urllib2 provides some extra functionality, namely the urlopen() function can allow you to specify headers (normally you'd have had to use
+ httplib in the past, which is far more verbose.) More importantly though, urllib2 provides the Request class, which allows for a more declarative approach to doing a request:
+	r = Request(url='http://www.mysite.com')
+	r.add_header('User-Agent', 'awesome fetcher')
+	r.add_data(urllib.urlencode({'foo': 'bar'})
+	response = urlopen(r)
+Note that urlencode() is only in urllib, not urllib2.
+	There are also handlers for implementing more advanced URL support in urllib2. The short answer is, unless you're working with legacy code,
+ you probably want to use the URL opener from urllib2, but you still need to import into urllib for some of the utility functions.
+	Bonus answer With Google App Engine, you can use any of httplib, urllib or urllib2, but all of them are just wrappers for Google's URL
+ Fetch API. That is, you are still subject to the same limitations such as ports, protocols, and the length of the response allowed. You can use the core of the libraries as you would expect for retrieving HTTP URLs, though
+
+Если не ошибаюсь, обработка ошибок соединения:
+	try:
+		f = urllib2.urlopen('http://en.wikipedia.org/wiki/OpenCola_(drink)')
+	except urllib2.HTTPError, e:
+		print e.fp.read()
+
+>>> from urllib import request
+>>> dir(request)
+['AbstractBasicAuthHandler', 'AbstractDigestAuthHandler', 'AbstractHTTPHandler',
+ 'BaseHandler', 'CacheFTPHandler', 'ContentTooShortError', 'DataHandler', 'FTPHa
+ndler', 'FancyURLopener', 'FileHandler', 'HTTPBasicAuthHandler', 'HTTPCookieProc
+essor', 'HTTPDefaultErrorHandler', 'HTTPDigestAuthHandler', 'HTTPError', 'HTTPEr
+rorProcessor', 'HTTPHandler', 'HTTPPasswordMgr', 'HTTPPasswordMgrWithDefaultReal
+m', 'HTTPPasswordMgrWithPriorAuth', 'HTTPRedirectHandler', 'HTTPSHandler', 'MAXF
+TPCACHE', 'OpenerDirector', 'ProxyBasicAuthHandler', 'ProxyDigestAuthHandler', '
+ProxyHandler', 'Request', 'URLError', 'URLopener', 'UnknownHandler', '__all__',
+'__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '
+__package__', '__spec__', '__version__', '_cut_port_re', '_ftperrors', '_have_ss
+l', 
+'_localhost', '_noheaders', '_opener', '_parse_proxy', '_proxy_bypass_macosx_sysconf',
+ '_randombytes', '_safe_gethostbyname', '_thishost', '_url_tempfiles',
+ 'addclosehook', 'addinfourl', 'base64', 'bisect', 'build_opener', 'collections'
+, 'contextlib', 'email', 'ftpcache', 'ftperrors', 'ftpwrapper', 'getproxies', 
+'getproxies_environment', 'getproxies_registry', 'hashlib', 'http', 'install_opener',
+ 'io', 'localhost', 'noheaders', 'os', 'parse_http_list', 'parse_keqv_list',
+'pathname2url', 'posixpath', 'proxy_bypass', 'proxy_bypass_environment', 
+'proxy_bypass_registry', 'quote', 're', 'request_host', 'socket', 'splitattr', 
+'splithost', 'splitpasswd', 'splitport', 'splitquery', 'splittag', 'splittype', 
+'splituser', 'splitvalue', 'ssl', 'string', 'sys', 'tempfile', 'thishost', 'time',
+ 'to_bytes', 'unquote', 'unquote_to_bytes', 'unwrap', 'url2pathname', 'urlcleanup',
+ 'urljoin', 'urlopen', 'urlparse', 'urlretrieve', 'urlsplit', 'urlunparse', 'warnings']
+
+>>> help(urllib.request)
+Help on module urllib.request in urllib:
+
+NAME
+    urllib.request - An extensible library for opening URLs using a variety of protocols
+
+DESCRIPTION
+    The simplest way to use this module is to call the urlopen function,
+    which accepts a string containing a URL or a Request object (described
+    below).  It opens the URL and returns the results as file-like
+    object; the returned object has some extra methods described below.
+
+    The OpenerDirector manages a collection of Handler objects that do
+    all the actual work.  Each Handler implements a particular protocol or
+    option.  The OpenerDirector is a composite object that invokes the
+    Handlers needed to open the requested URL.  For example, the
+    HTTPHandler performs HTTP GET and POST requests and deals with
+    non-error returns.  The HTTPRedirectHandler automatically deals with
+    HTTP 301, 302, 303 and 307 redirect errors, and the HTTPDigestAuthHandler
+    deals with digest authentication.
+
+    urlopen(url, data=None) -- Basic usage is the same as original
+    urllib.  pass the url and optionally data to post to an HTTP URL, and
+    get a file-like object back.  One difference is that you can also pass
+    a Request instance instead of URL.  Raises a URLError (subclass of
+    OSError); for HTTP errors, raises an HTTPError, which can also be
+    treated as a valid response.
+
+    build_opener -- Function that creates a new OpenerDirector instance.
+    Will install the default handlers.  Accepts one or more Handlers as
+    arguments, either instances or Handler classes that it will
+    instantiate.  If one of the argument is a subclass of the default
+    handler, the argument will be installed instead of the default.
+
+    install_opener -- Installs a new opener as the default opener.
+
+    objects of interest:
+
+    OpenerDirector -- Sets up the User Agent as the Python-urllib client and manages
+    the Handler classes, while dealing with requests and responses.
+
+    Request -- An object that encapsulates the state of a request.  The
+    state can be as simple as the URL.  It can also include extra HTTP
+    headers, e.g. a User-Agent.
+
+    BaseHandler --
+
+    internals:
+    BaseHandler and parent
+    _call_chain conventions
+
+    Example usage:
+    import urllib.request
+    # set up authentication info
+    authinfo = urllib.request.HTTPBasicAuthHandler()
+    authinfo.add_password(realm='PDQ Application',
+                          uri='https://mahler:8092/site-updates.py',
+                          user='klem',
+                          passwd='geheim$parole')
+    proxy_support = urllib.request.ProxyHandler({"http" : "http://ahad-haam:3128"})
+    # build a new opener that adds authentication and caching FTP handlers
+    opener = urllib.request.build_opener(proxy_support, authinfo,
+                                         urllib.request.CacheFTPHandler)
+    # install it
+    urllib.request.install_opener(opener)
+    f = urllib.request.urlopen('http://www.python.org/')
+
+CLASSES
+    builtins.object
+        AbstractBasicAuthHandler
+            HTTPBasicAuthHandler(AbstractBasicAuthHandler, BaseHandler)
+            ProxyBasicAuthHandler(AbstractBasicAuthHandler, BaseHandler)
+        AbstractDigestAuthHandler
+        BaseHandler
+            DataHandler
+            FTPHandler
+                CacheFTPHandler
+            FileHandler
+            HTTPCookieProcessor
+            HTTPDefaultErrorHandler
+            HTTPDigestAuthHandler(BaseHandler, AbstractDigestAuthHandler)
+            HTTPErrorProcessor
+            HTTPRedirectHandler
+            ProxyDigestAuthHandler(BaseHandler, AbstractDigestAuthHandler)
+            ProxyHandler
+            UnknownHandler
+        HTTPPasswordMgr
+            HTTPPasswordMgrWithDefaultRealm
+                HTTPPasswordMgrWithPriorAuth
+        OpenerDirector
+        Request
+        URLopener
+            FancyURLopener
+    AbstractHTTPHandler(BaseHandler)
+        HTTPHandler
+        HTTPSHandler
+
+    class AbstractBasicAuthHandler(builtins.object)
+     |  Methods defined here:
+     |
+     |  __init__(self, password_mgr=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  http_error_auth_reqed(self, authreq, host, req, headers)     |
+     |  http_request(self, req)     |
+     |  http_response(self, req, response)     |
+     |  https_request = http_request(self, req)     |
+     |  https_response = http_response(self, req, response)     |
+     |  retry_http_basic_auth(self, host, req, realm)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:     |
+     |  rx = re.compile('(?:.*,)*[ \t]*([^ \t]+)[ \t]+realm=(["\']?)([^"\']*)\...
+
+    class AbstractDigestAuthHandler(builtins.object)
+     |  Methods defined here:     |
+     |  __init__(self, passwd=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.     |
+     |  get_algorithm_impls(self, algorithm)     |
+     |  get_authorization(self, req, chal)     |
+     |  get_cnonce(self, nonce)     |
+     |  get_entity_digest(self, data, chal)     |
+     |  http_error_auth_reqed(self, auth_header, host, req, headers)     |
+     |  reset_retry_count(self)     |
+     |  retry_http_digest_auth(self, req, auth)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+    class BaseHandler(builtins.object)
+     |  Methods defined here:     |
+     |  __lt__(self, other)
+     |      Return self<value.     |
+     |  add_parent(self, parent)     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:     |
+     |  handler_order = 500
+
+    class CacheFTPHandler(FTPHandler)
+     |  Method resolution order:
+     |      CacheFTPHandler
+     |      FTPHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self)
+     |      Initialize self.  See help(type(self)) for accurate signature.     |
+     |  check_cache(self)     |
+     |  clear_cache(self)     |
+     |  connect_ftp(self, user, passwd, host, port, dirs, timeout)     |
+     |  setMaxConns(self, m)     |
+     |  setTimeout(self, t)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from FTPHandler:     |
+     |  ftp_open(self, req)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:     |
+     |  __lt__(self, other)
+     |      Return self<value.     |
+     |  add_parent(self, parent)
+     |
+-- Далее  --
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  handler_order = 500
+
+    class CacheFTPHandler(FTPHandler)
+     |  Method resolution order:
+     |      CacheFTPHandler
+     |      FTPHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  check_cache(self)
+     |
+     |  clear_cache(self)
+     |
+     |  connect_ftp(self, user, passwd, host, port, dirs, timeout)
+     |
+     |  setMaxConns(self, m)
+     |
+     |  setTimeout(self, t)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from FTPHandler:
+     |
+     |  ftp_open(self, req)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class DataHandler(BaseHandler)
+     |  Method resolution order:
+     |      DataHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  data_open(self, req)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class FTPHandler(BaseHandler)
+     |  Method resolution order:
+     |      FTPHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  connect_ftp(self, user, passwd, host, port, dirs, timeout)
+     |
+     |  ftp_open(self, req)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class FancyURLopener(URLopener)
+     |  Derived class with handlers for errors we can handle (perhaps).
+     |
+     |  Method resolution order:
+     |      FancyURLopener
+     |      URLopener
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  get_user_passwd(self, host, realm, clear_cache=0)
+     |
+     |  http_error_301(self, url, fp, errcode, errmsg, headers, data=None)
+     |      Error 301 -- also relocated (permanently).
+     |
+     |  http_error_302(self, url, fp, errcode, errmsg, headers, data=None)
+     |      Error 302 -- relocated (temporarily).
+     |
+     |  http_error_303(self, url, fp, errcode, errmsg, headers, data=None)
+     |      Error 303 -- also relocated (essentially identical to 302).
+     |
+     |  http_error_307(self, url, fp, errcode, errmsg, headers, data=None)
+     |      Error 307 -- relocated, but turn POST into error.
+     |
+     |  http_error_401(self, url, fp, errcode, errmsg, headers, data=None, retry
+=False)
+     |      Error 401 -- authentication required.
+     |      This function supports Basic authentication only.
+     |
+     |  http_error_407(self, url, fp, errcode, errmsg, headers, data=None, retry
+=False)
+     |      Error 407 -- proxy authentication required.
+     |      This function supports Basic authentication only.
+     |
+     |  http_error_default(self, url, fp, errcode, errmsg, headers)
+     |      Default error handling -- don't raise an exception.
+     |
+     |  prompt_user_passwd(self, host, realm)
+     |      Override this in a GUI environment!
+     |
+     |  redirect_internal(self, url, fp, errcode, errmsg, headers, data)
+     |
+     |  retry_http_basic_auth(self, url, realm, data=None)
+     |
+     |  retry_https_basic_auth(self, url, realm, data=None)
+     |
+     |  retry_proxy_http_basic_auth(self, url, realm, data=None)
+     |
+     |  retry_proxy_https_basic_auth(self, url, realm, data=None)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from URLopener:
+     |
+     |  __del__(self)
+     |
+     |  addheader(self, *args)
+     |      Add a header to be used by the HTTP interface only
+     |      e.g. u.addheader('Accept', 'sound/basic')
+     |
+     |  cleanup(self)
+     |
+     |  close(self)
+     |
+     |  http_error(self, url, fp, errcode, errmsg, headers, data=None)
+     |      Handle http errors.
+     |
+     |      Derived class can override this, or provide specific handlers
+     |      named http_error_DDD where DDD is the 3-digit error code.
+     |
+     |  open(self, fullurl, data=None)
+     |      Use URLopener().open(file) instead of open(file, 'r').
+     |
+     |  open_data(self, url, data=None)
+     |      Use "data" URL.
+     |
+     |  open_file(self, url)
+     |      Use local file or FTP depending on form of URL.
+     |
+     |  open_ftp(self, url)
+     |      Use FTP protocol.
+     |
+     |  open_http(self, url, data=None)
+     |      Use HTTP protocol.
+     |
+     |  open_https(self, url, data=None)
+     |      Use HTTPS protocol.
+     |
+     |  open_local_file(self, url)
+     |      Use local file.
+     |
+     |  open_unknown(self, fullurl, data=None)
+     |      Overridable interface to open unknown URL type.
+     |
+     |  open_unknown_proxy(self, proxy, fullurl, data=None)
+     |      Overridable interface to open unknown URL type.
+     |
+     |  retrieve(self, url, filename=None, reporthook=None, data=None)
+     |      retrieve(url) returns (filename, headers) for a local object
+     |      or (tempfilename, headers) for a remote object.
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from URLopener:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from URLopener:
+     |
+     |  version = 'Python-urllib/3.6'
+
+    class FileHandler(BaseHandler)
+     |  Method resolution order:
+     |      FileHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  file_open(self, req)
+     |      # Use local file or FTP depending on form of URL
+     |
+     |  get_names(self)
+     |
+     |  open_local_file(self, req)
+     |      # not entirely sure what the rules are here
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  names = None
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+     class HTTPBasicAuthHandler(AbstractBasicAuthHandler, BaseHandler)
+     |  Method resolution order:
+     |      HTTPBasicAuthHandler
+     |      AbstractBasicAuthHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  http_error_401(self, req, fp, code, msg, headers)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  auth_header = 'Authorization'
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from AbstractBasicAuthHandler:
+     |
+     |  __init__(self, password_mgr=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  http_error_auth_reqed(self, authreq, host, req, headers)
+     |
+     |  http_request(self, req)
+     |
+     |  http_response(self, req, response)
+     |
+     |  https_request = http_request(self, req)
+     |
+     |  https_response = http_response(self, req, response)
+     |
+     |  retry_http_basic_auth(self, host, req, realm)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from AbstractBasicAuthHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from AbstractBasicAuthHandler:
+     |
+     |  rx = re.compile('(?:.*,)*[ \t]*([^ \t]+)[ \t]+realm=(["\']?)([^"\']*)\..
+.
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class HTTPCookieProcessor(BaseHandler)
+     |  Method resolution order:
+     |      HTTPCookieProcessor
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, cookiejar=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  http_request(self, request)
+     |
+     |  http_response(self, request, response)
+     |
+     |  https_request = http_request(self, request)
+     |
+     |  https_response = http_response(self, request, response)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class HTTPDefaultErrorHandler(BaseHandler)
+     |  Method resolution order:
+     |      HTTPDefaultErrorHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  http_error_default(self, req, fp, code, msg, hdrs)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHandler:
+     |
+     |  handler_order = 500
+
+    class HTTPDigestAuthHandler(BaseHandler, AbstractDigestAuthHandler)
+     |  An authentication protocol defined by RFC 2069
+     |
+     |  Digest authentication improves on basic authentication because it
+     |  does not transmit passwords in the clear.
+     |
+     |  Method resolution order:
+     |      HTTPDigestAuthHandler
+     |      BaseHandler
+     |      AbstractDigestAuthHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  http_error_401(self, req, fp, code, msg, headers)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  auth_header = 'Authorization'
+     |
+     |  handler_order = 490
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from AbstractDigestAuthHandler:
+     |
+     |  __init__(self, passwd=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  get_algorithm_impls(self, algorithm)
+     |
+     |  get_authorization(self, req, chal)
+     |
+     |  get_cnonce(self, nonce)
+     |
+     |  get_entity_digest(self, data, chal)
+     |
+     |  http_error_auth_reqed(self, auth_header, host, req, headers)
+     |
+     |  reset_retry_count(self)
+     |
+     |  retry_http_digest_auth(self, req, auth)
+
+    class HTTPErrorProcessor(BaseHandler)
+     |  Process HTTP error responses.
+     |
+     |  Method resolution order:
+     |      HTTPErrorProcessor
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  http_response(self, request, response)
+     |
+     |  https_response = http_response(self, request, response)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |
+     |  handler_order = 1000
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+     |      Return self<value.
+     |
+     |  add_parent(self, parent)
+     |
+     |  close(self)
+     |
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from BaseHandler:
+     |
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+    class HTTPHandler(AbstractHTTPHandler)
+     |  Method resolution order:
+     |      HTTPHandler
+     |      AbstractHTTPHandler
+     |      BaseHandler
+     |      builtins.object
+     |
+     |  Methods defined here:
+     |
+     |  http_open(self, req)
+     |
+     |  http_request = do_request_(self, request)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from AbstractHTTPHandler:
+     |
+     |  __init__(self, debuglevel=0)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |
+     |  do_open(self, http_class, req, **http_conn_args)
+     |      Return an HTTPResponse object for the request, using http_class.
+     |
+     |      http_class must implement the HTTPConnection API from http.client.
+     |
+     |  do_request_(self, request)
+     |
+     |  set_http_debuglevel(self, level)
+     |
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHandler:
+     |
+     |  __lt__(self, other)
+-- Далее  --

@@ -1,0 +1,10 @@
+try:
+	print(int(input('Give a number..')))
+except:
+	print('Don't be dummy!!!')
+else:	# if no except
+	print('Ok')
+finally:
+	print('WTF are you doing?')
+print('Проверочка...')
+Почему try /except  нет во встроенных методах? 

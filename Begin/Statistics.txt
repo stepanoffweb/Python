@@ -1,0 +1,10 @@
+>>> import statistics
+>>> dir( statistics)
+['Decimal', 'Fraction', 'StatisticsError', '__all__', '__builtins__', '__cached_
+_', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__',
+'_coerce', '_convert', '_counts', '_exact_ratio', '_fail_neg', '_find_lteq', '_f
+ind_rteq', '_isfinite', '_ss', '_sum', 
+	'bisect_left', 'bisect_right', 'chain', 'collections', 'decimal', 'groupby',
+ 'harmonic_mean', 'math', 'mean', 'median', 'median_grouped', 'median_high', 
+'median_low', 'mode', 'numbers', 'pstdev', 'pvariance', 'stdev', 'variance']
+>>>

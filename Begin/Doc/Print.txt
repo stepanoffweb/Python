@@ -1,0 +1,35 @@
+﻿Python 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 16:07:46) [MSC v.1900 32 bit (Inte
+l)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> dir(__builtins__.print)
+['__call__', '__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__form
+at__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_s
+ubclass__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '
+__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__self__', '__setattr
+__', '__sizeof__', '__str__', '__subclasshook__', '__text_signature__']
+>>> help(__builtins__.print)
+Help on built-in function print in module builtins:
+
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+    Prints the values to a stream, or to sys.stdout by default.
+    Optional keyword arguments:
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+    sep:   string inserted between values, default a space.
+    end:   string appended after the last value, default a newline.
+    flush: whether to forcibly flush the stream.
+
+>>>>>
+Функция print Python выводит заданные объекты на стандартное устройство вывода (экран) или отправляет их текстовым потоком в файл.
+Полный синтаксис функции print():
+    print(*objects, sep=' ', end='n', file=sys.stdout, flush=False)
+Параметры print()
+    objects – объект, который нужно вывести * обозначает, что объектов может быть несколько;
+    sep – разделяет объекты. Значение по умолчанию: ‘ ‘;
+    end – ставится после всех объектов;
+    file – ожидается объект с методом write (string). Если значение не задано, для вывода объектов используется файл sys.stdout;
+    flush – если задано значение True, поток принудительно сбрасывается в файл. Значение по умолчанию: False.
+Примечание: sep, end, file и flush — это аргументы-ключевые слова. Если хотите воспользоваться аргументом sep, используйте:
+    print(*objects, sep = 'separator')
+а не    print(*objects, 'separator')

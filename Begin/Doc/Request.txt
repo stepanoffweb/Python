@@ -1,0 +1,55 @@
+﻿Microsoft Windows [Version 6.1.7601]
+(c) Корпорация Майкрософт (Microsoft Corp.), 2009. Все права защищены.
+
+C:\Users\User>pip install requests
+Collecting requests
+  Downloading https://files.pythonhosted.org/packages/65/47/7e02164a2a3db50ed6d8
+a6ab1d6d60b69c4c3fdf57a284257925dfc12bda/requests-2.19.1-py2.py3-none-any.whl (9
+1kB)
+    100% |████████████████████████████████| 92kB 1.0MB/s
+Collecting chardet<3.1.0,>=3.0.2 (from requests)
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b648
+7b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133
+kB)
+    100% |████████████████████████████████| 143kB 2.1MB/s
+Collecting certifi>=2017.4.17 (from requests)
+  Downloading https://files.pythonhosted.org/packages/7c/e6/92ad559b7192d846975f
+c916b65f667c7b8c3a32bea7372340bfe9a15fa5/certifi-2018.4.16-py2.py3-none-any.whl
+(150kB)
+    100% |████████████████████████████████| 153kB 3.0MB/s
+Collecting idna<2.8,>=2.5 (from requests)
+  Downloading https://files.pythonhosted.org/packages/4b/2a/0276479a4b3caeb8a8c1
+af2f8e4355746a97fab05a372e4a2c6a6b876165/idna-2.7-py2.py3-none-any.whl (58kB)
+    100% |████████████████████████████████| 61kB 2.1MB/s
+Collecting urllib3<1.24,>=1.21.1 (from requests)
+  Downloading https://files.pythonhosted.org/packages/bd/c9/6fdd990019071a4a32a5
+e7cb78a1d92c53851ef4f56f62a3486e6a7d8ffb/urllib3-1.23-py2.py3-none-any.whl (133k
+B)
+    100% |████████████████████████████████| 143kB 3.2MB/s
+Installing collected packages: chardet, certifi, idna, urllib3, requests
+
+  The script chardetect.exe is installed in 'c:\users\user\appdata\local\program
+s\python\python36\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warn
+ing, use --no-warn-script-location.
+Successfully installed certifi-2018.4.16 chardet-3.0.4 idna-2.7 requests-2.19.1
+urllib3-1.23
+
+C:\Users\User>python
+Python 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 17:00:18) [MSC v.1900 64 bit (AMD6
+4)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import requests
+>>> dir(requests)
+['ConnectTimeout', 'ConnectionError', 'DependencyWarning', 'FileModeWarning', 'H
+TTPError', 'NullHandler', 'PreparedRequest', 'ReadTimeout', 'Request', 'RequestE
+xception', 'RequestsDependencyWarning', 'Response', 'Session', 'Timeout', 'TooMa
+nyRedirects', 'URLRequired', '__author__', '__author_email__', '__build__', '__b
+uiltins__', '__cached__', '__cake__', '__copyright__', '__description__', '__doc
+__', '__file__', '__license__', '__loader__', '__name__', '__package__', '__path
+__', '__spec__', '__title__', '__url__', '__version__', '_check_cryptography', '
+_internal_utils', 
+	'adapters', 'api', 'auth', 'certs', 'chardet', 'check_compatibility', 
+'codes', 'compat', 'cookies', 'delete', 'exceptions', 'get', 'head', 'hooks',
+ 'logging', 'models', 'options', 'packages', 'patch', 'post', 'put', 'request',
+ 'session', 'sessions', 'status_codes', 'structures', 'urllib3', 'utils', 'warnings']

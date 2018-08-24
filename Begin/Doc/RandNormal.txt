@@ -1,0 +1,10 @@
+﻿I'm in the situation where I need to generate both uniform random numbers in the range [i,j] as well as normally distributed numbers in that range (or at least such that 98% of the random numbers fit into that range). Computing the mean of the uniform distribution is not difficult, so now I have a mean and a range - but I need the final parameter, the standard deviation in order to generate all my random numbers. 
+You need to find out, which function in Python gives you the inverse of the cumulative distribution function of the normal distribution: https://en.wikipedia.org/wiki/Normal_distribution#Cumulative_distribution_function The cummulative distribution function of the normal distribution is often called "Фита" 
+and it gives you the percentage of normally distributed random numbers up to a certain z-value. The inverse should give you the z-value to a certain percentage.
+See the red curve in the above linked Wikipedia article: https://upload.wikimedia.org/wikipedia/commons/c/ca/Normal_Distribution_CDF.svg
+Apparently the corresponding Python function is norm.ppf() in scipy.stats : https://stackoverflow.com/questions/24695174/python-equivalent-of-qnorm-qf-and-qchi2-of-r
+	 There is a range [i,j] given and you look for a mean and a standard deviation, so that 98% of the random numbers fall into this range. The mean is easily 
+computed as mean=(i+j)/2 You can use the above mentioned functions to calculate a z-value, so that mean?z?sd=i and mean+z?sd=j This allows for easy computation the standard deviation sd.
+If you choose such ? that makes 98% of normally distributed values fall into (alpha,beta) interval (i.e. "мю"±2.33"сигма"), then since your data would come from truncated normal distribution, this would obviously lead to situation where 100% of generated values fall into the prespecified range. 
+______________________________________________________________________________________________________
+ramdom.normalvariate() эквивалентна .gauss(), вторая - быстрее, первая- потокобезопасней (при невозвратном коде несущественно??)

@@ -1,0 +1,17 @@
+>>> import sys
+>>> a=set()
+>>> print(set.__sizeof__(a))
+100
+>>> sys.getsizeof(a)
+116
+>>> a=()
+>>> sys.getsizeof(a)
+28
+>>> print(tuple.__sizeof__(a))
+12
+>>> a=[]
+>>> print(list.__sizeof__(a))
+20
+>>> sys.getsizeof(a)
+36
+вн гю умъ???!!!

@@ -1,0 +1,20 @@
+import timeit
+
+list_test= timeit.timeit(stmt= "[1,2,3,4,5]", number= 100000)
+print(list_test)
+¬рем€ на создание 100 000 списков [1, 2, 3, 4, 5] = 0.1040, кортежей =0.0143 что в 7 раз меньше
+
+
+>>> dir(timeit)
+['Timer', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loa
+der__', '__name__', '__package__', '__spec__', '_globals', 
+	'default_number', 'default_repeat', 'default_timer', 'dummy_src_name', 'gc',
+'itertools', 'main', 'reindent', 'repeat', 'sys', 'template', 'time', 'timeit']
+>>> help(timeit.timeit)
+Help on function timeit in module timeit:
+
+timeit(stmt='pass', setup='pass', timer=<built-in function perf_counter>, number
+=1000000, globals=None)
+    Convenience function to create Timer object and call timeit method.
+
+>>>print(timeit.timeit('[List Comprehension]', global= globals, number= 1000, setup= ))# –азобратьс€ с аргументами global, setup

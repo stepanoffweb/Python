@@ -1,0 +1,9 @@
+﻿>>> import json
+>>> dir(json)
+['JSONDecodeError', 'JSONDecoder', 'JSONEncoder', '__all__', '__author__', '__bu
+iltins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__pac
+kage__', '__path__', '__spec__', '__version__', '_default_decoder', '_default_en
+coder', 
+
+	'codecs', 'decoder', 'detect_encoding', 'dump', 'dumps', 'encoder', 'load', 'loads', 'scanner']
+>>>

@@ -1,0 +1,14 @@
+﻿g= (x*x for x in [2, 3, 5])
+print(next(g))
+print(next(g))
+print(next(g))
+
+g= (x**x for x in range(10) if x%2==0)
+#print(g()) НЕ РАБОТАЕТ:TypeError: 'generator' object is not callable
+print(list(g))
+for element in g: print(element)# не работает()
+
+g= (x*y for x in range(10)  for y in range(5))
+print(list(g))
+g= (x*y for x in range(10) if x%2==0 for y in range(5))
+print(list(g))

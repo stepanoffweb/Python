@@ -1,0 +1,16 @@
+class Person:
+	def __init__(self, name, age) - создаем конструктор класса 
+		self.name= theName
+		self. age= theAge
+		
+	def set(self, name, age) - инициализируем объект класса самописным методом set
+		self.name= theName
+		self. age= theAge
+		
+vlad= Person()
+vlad.set("Vlad", 25)
+
+igor= Person("Igor", 18) - работает конструктор класса
+
+class Student(Person):
+	def__init__(self, args)

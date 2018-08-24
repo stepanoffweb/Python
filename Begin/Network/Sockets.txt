@@ -1,0 +1,32 @@
+>>> import socket
+>>> dir(socket)
+['AF_APPLETALK', 'AF_DECnet', 'AF_INET', 'AF_INET6', 'AF_IPX', 'AF_IRDA', 'AF_SN
+A', 'AF_UNSPEC', 'AI_ADDRCONFIG', 'AI_ALL', 'AI_CANONNAME', 'AI_NUMERICHOST', 'A
+I_NUMERICSERV', 'AI_PASSIVE', 'AI_V4MAPPED', 'AddressFamily', 'AddressInfo', 'CA
+PI', 'EAGAIN', 'EAI_AGAIN', 'EAI_BADFLAGS', 'EAI_FAIL', 'EAI_FAMILY', 'EAI_MEMOR
+Y', 'EAI_NODATA', 'EAI_NONAME', 'EAI_SERVICE', 'EAI_SOCKTYPE', 'EBADF', 'EWOULDB
+LOCK', 'INADDR_ALLHOSTS_GROUP', 'INADDR_ANY', 'INADDR_BROADCAST', 'INADDR_LOOPBA
+CK', 'INADDR_MAX_LOCAL_GROUP', 'INADDR_NONE', 'INADDR_UNSPEC_GROUP', 'IPPORT_RES
+ERVED', 'IPPORT_USERRESERVED', 'IPPROTO_ICMP', 'IPPROTO_IP', 'IPPROTO_RAW', 'IPP
+ROTO_TCP', 'IPPROTO_UDP', 'IPV6_CHECKSUM', 'IPV6_DONTFRAG', 'IPV6_HOPLIMIT', 'IP
+V6_HOPOPTS', 'IPV6_JOIN_GROUP', 'IPV6_LEAVE_GROUP', 'IPV6_MULTICAST_HOPS', 'IPV6
+_MULTICAST_IF', 'IPV6_MULTICAST_LOOP', 'IPV6_PKTINFO', 'IPV6_RECVRTHDR', 'IPV6_R
+ECVTCLASS', 'IPV6_RTHDR', 'IPV6_TCLASS', 'IPV6_UNICAST_HOPS', 'IPV6_V6ONLY', 'IP
+_ADD_MEMBERSHIP', 'IP_DROP_MEMBERSHIP', 'IP_HDRINCL', 'IP_MULTICAST_IF', 'IP_MUL
+TICAST_LOOP', 'IP_MULTICAST_TTL', 'IP_OPTIONS', 'IP_RECVDSTADDR', 'IP_TOS', 'IP_TTL',
+ 'IntEnum', 'IntFlag', 'MSG_BCAST', 'MSG_CTRUNC', 'MSG_DONTROUTE', 'MSG_MCAST',
+ 'MSG_OOB', 'MSG_PEEK', 'MSG_TRUNC', 'MSG_WAITALL', 'MsgFlag', 'NI_DGRAM',
+ 'NI_MAXHOST', 'NI_MAXSERV', 'NI_NAMEREQD', 'NI_NOFQDN', 'NI_NUMERICHOST',
+ 'NI_NUMERICSERV', 'RCVALL_MAX', 'RCVALL_OFF', 'RCVALL_ON', 'RCVALL_SOCKETLEVELONLY',
+  'SHUT_RD', 'SHUT_RDWR', 'SHUT_WR', 'SIO_KEEPALIVE_VALS', 'SIO_LOOPBACK_FAST_PATH',
+ 'SIO_RCVALL', 'SOCK_DGRAM', 'SOCK_RAW', 'SOCK_RDM', 'SOCK_SEQPACKET',
+ 'SOCK_STREAM', 'SOL_IP', 'SOL_SOCKET', 'SOL_TCP', 'SOL_UDP', 'SOMAXCONN',
+ 'SO_ACCEPTCONN', 'SO_BROADCAST', 'SO_DEBUG', 'SO_DONTROUTE', 'SO_ERROR',
+ 'SO_EXCLUSIVEADDRUSE', 'SO_KEEPALIVE', 'SO_LINGER', 'SO_OOBINLINE', 'SO_RCVBUF',
+  'SO_RCVLOWAT', 'SO_RCVTIMEO', 'SO_REUSEADDR', 'SO_SNDBUF', 'SO_SNDLOWAT', 'SO_SNDTIMEO', 'SO_TYPE', 'SO_USELOOPBACK', 'SocketIO', 'SocketKind', 'SocketType', 'TCP_MAXSEG',
+   'TCP_NODELAY', '_GLOBAL_DEFAULT_TIMEOUT', '_GiveupOnSendfile', '_LOCALHOST',  '_LOCALHOST_V6', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__',
+'_blocking_errnos', '_intenum_converter', '_realsocket', '_socket',
+     'create_connection', 'dup', 'errno', 'error', 'errorTab', 'fromfd', 'fromshare',
+ 'gaierror', 'getaddrinfo', 'getdefaulttimeout', 'getfqdn', 'gethostbyaddr',
+ 'gethostbyname', 'gethostbyname_ex', 'gethostname', 'getnameinfo', 'getprotobyname', 'getservbyname', 'getservbyport', 'has_ipv6', 'herror', 'htonl', 'htons', 'inet_aton', 'inet_ntoa', 'inet_ntop', 'inet_pton', 'io', 'ntohl', 'ntohs', 'os', 'selectors', 'setdefaulttimeout', 'socket', 'socketpair', 'sys', 'timeout']
+>>>

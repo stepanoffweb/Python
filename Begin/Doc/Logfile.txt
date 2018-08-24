@@ -1,0 +1,2 @@
+INFO 2018-05-17 08:55:13,125 - Just information
+DEBUG 2018-05-17 08:55:13,125 - To trace errors

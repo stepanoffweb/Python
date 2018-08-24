@@ -1,0 +1,105 @@
+﻿
+C:\Users\User>python
+Python 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 17:00:18) [MSC v.1900 64 bit (AMD6
+4)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import requests
+>>> dir( requests)
+['ConnectTimeout', 'ConnectionError', 'DependencyWarning', 'FileModeWarning', 'H
+TTPError', 'NullHandler', 'PreparedRequest', 'ReadTimeout', 'Request', 'RequestE
+xception', 'RequestsDependencyWarning', 'Response', 'Session', 'Timeout', 'TooMa
+nyRedirects', 'URLRequired', '__author__', '__author_email__', '__build__', '__b
+uiltins__', '__cached__', '__cake__', '__copyright__', '__description__', '__doc
+__', '__file__', '__license__', '__loader__', '__name__', '__package__', '__path
+__', '__spec__', '__title__', '__url__', '__version__', '_check_cryptography', '
+_internal_utils', 
+	'adapters', 'api', 'auth', 'certs', 'chardet', 'check_compatibility', 'codes',
+ 'compat', 'cookies', 'delete', 'exceptions', 'get', 'head', 'hooks', 'logging',
+ 'models', 'options', 'packages', 'patch', 'post', 'put', 'request', 'session', 
+'sessions', 'status_codes', 'structures', 'urllib3', 'utils', 'warnings']
+>>>import requests
+req = requests.get('http://www.tutsplus.com/')
+ 
+req.encoding      # returns 'utf-8'
+req.status_code   # returns 200
+req.elapsed       # returns datetime.timedelta(0, 1, 666890)
+req.url           # returns 'https://tutsplus.com/'
+ 
+req.history      
+# returns [<Response [301]>, <Response [301]>]
+ 
+req.headers['Content-Type']
+# returns 'text/html; charset=utf-8'
+You can download a file in pieces or chunks using the iter_content(chunk_size = 1, decode_unicode=False) method. 
+	This method iterates over the response data in chunk_size number of bytes at once. When stream=True has been set on the request, this method
+will avoid reading the whole file into memory at once for large responses. The chunk_size parameter can be either an integer or None. When set to an integer value, chunk_size determines the number of bytes that should be read into the memory.
+	When chunk_size is set to None and stream is set to True, the data will be read as it arrives in whatever size of chunks are received. When
+chunk_size is set to None and stream is set to False, all the data will be returned as a single chunk.
+# скачиваем изображение
+req = requests.get('path/to/forest.jpg', stream=True)
+req.raise_for_status()
+with open('Forest.jpg', 'wb') as fd:
+    for chunk in req.iter_content(chunk_size=50000):
+        print('Received a Chunk')
+        fd.write(chunk)
+# передаем параметры в URL запрос
+query = {'q': 'Forest', 'order': 'popular', 'min_width': '800', 'min_height': '600'}
+req = requests.get('https://pixabay.com/en/photos/', params=query)
+req.url
+
+Making a POST request is just as easy as making GET requests. You just use the post() function instead of get(). This can be useful when you are automatically submitting forms. For example, the following code will download the whole Wikipedia page on Nanotechnology and save it on your PC.
+req = requests.post('https://en.wikipedia.org/w/index.php', data = {'search':'Nanotechnology'})
+req.raise_for_status()
+with open('Nanotechnology.html', 'wb') as fd:
+    for chunk in req.iter_content(chunk_size=50000):
+        fd.write(chunk)
+# Банка с печеньками- ???
+jar = requests.cookies.RequestsCookieJar()
+jar.set('first_cookie', 'first', domain='httpbin.org', path='/cookies')
+jar.set('second_cookie', 'second', domain='httpbin.org', path='/extra')
+jar.set('third_cookie', 'third', domain='httpbin.org', path='/cookies')
+url = 'http://httpbin.org/cookies'
+req = requests.get(url, cookies=jar) 
+req.text 
+# returns '{ "cookies": { "first_cookie": "first", "third_cookie": "third" }}'
+
+Sometimes it is useful to preserve certain parameters across multiple requests. The Session object does exactly that. For example, it will persist cookie data across all requests made using the same session. The Session object uses urllib3's connection pooling. This means that the underlying TCP connection will be reused for all the requests made to the same host. This can significantly boost the performance. You can also use methods of the Requests object with the Session object.
+
+Here is an example of multiple requests sent with and without using sessions:
+ 
+reqOne = requests.get('https://tutsplus.com/')
+reqOne.cookies['_tuts_session']
+#returns 'cc118d94a84f0ea37c64f14dd868a175'
+ 
+reqTwo = requests.get('https://code.tutsplus.com/tutorials')
+reqTwo.cookies['_tuts_session']
+#returns '3775e1f1d7f3448e25881dfc35b8a69a'
+ 
+ssnOne = requests.Session()
+ssnOne.get('https://tutsplus.com/')
+ssnOne.cookies['_tuts_session']
+#returns '4c3dd2f41d2362108fbb191448eab3b4'
+ 
+reqThree = ssnOne.get('https://code.tutsplus.com/tutorials')
+reqThree.cookies['_tuts_session']
+#returns '4c3dd2f41d2362108fbb191448eab3b4'
+
+As you can see, the session cookie has a different value in the first and second request, but it has the same value when we used the Session object. You will be getting a different value when you try out this code, but in your case too, the cookie for the requests made using the session object will have the same value.
+Sessions are also helpful when you want to send the same data across all requests. For example, if you decide to send a cookie or a user-agent header with all the requests to a given domain, you can use Session objects. Here is an example:
+
+ssn = requests.Session()
+ssn.cookies.update({'visit-month': 'February'})
+ 
+reqOne = ssn.get('http://httpbin.org/cookies')
+print(reqOne.text)
+# prints information about "visit-month" cookie
+ 
+reqTwo = ssn.get('http://httpbin.org/cookies', cookies={'visit-year': '2017'})
+print(reqTwo.text)
+# prints information about "visit-month" and "visit-year" cookie
+ 
+reqThree = ssn.get('http://httpbin.org/cookies')
+print(reqThree.text)
+# prints information about "visit-month" cookie
+
+As you can see, the "visit-month" session cookie is sent with all three requests. However, the "visit-year" cookie is sent only during the second request. There is no mention of the "vist-year" cookie in the third request too. This confirms the fact that cookies or other data set on individual requests won't be sent with other session requests.
