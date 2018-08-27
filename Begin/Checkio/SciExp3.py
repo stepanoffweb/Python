@@ -16,15 +16,23 @@ Some consequences of the above definitions:
 Input: A wellfounded and wellsized iterable.
 Output: A bool. '''
 import collections
-
-def flattern(l):
-    for el in l:
-        if isinstance(el, collections.Iterable) and not isinstance(el, (str, bytes)):# Кроmе условия iterable должно быть ВЛОЖЕННОСТЬ! А таких свойств нет??? типа "контейнер"
-            yield from flatten(el)
-        else:
-            yield el
-	`		if el!=0 : return False
-			else: continue
+def completely_empty(array):
+    if type(array) == str:
+        return True if array == '' else False
+    if type(array) == list:
+        return True if len(array) == 0 else   all([completely_empty(i) for i in array])
+    if type(array) == dict:
+        return True if len(array) == 0 or  (len(array.keys()) == 1 and '' in array) else False
+    if type(array) == tuple:
+        return completely_empty(list(array))
+    try:
+        array.__getitem__(0)
+    except IndexError:
+        return True
+    except AttributeError:
+        pass
+    return all([completely_empty(i) for i in array])  if isinstance(array, collections.Iterable)
+        else False
 
 
 
