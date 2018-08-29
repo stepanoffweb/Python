@@ -8,53 +8,78 @@ Label
 </head>
 <body>
 <ol type='i'>
-
 	      <li>Coffee</li>
-
 	      <li>Tea</li>
-
 	      <li>Milk</li>
-
 	</ol>
-<em>Emphasized text</em><br>
-
+	
+	<em>Emphasized text</em><br>
 	<strong>Жирный текст</strong><br>
-
 	<dfn>Формулировка термина</dfn><br>
-
 	<code>Текст компьютерного кода</code><br>
-
 	<samp>Пример текста компьютерного кода</samp><br>
-
 	<kbd>Текст клавиатуры</kbd><br>
-
 	<var>Переменная</var><br>
-
-	<cite>Цитата</cite>
-<dl>
-
-	  <dt>Coffee</dt>
-
-	    <dd>- black hot drink</dd>
-
-	  <dt>Milk</dt>
-
-	    <dd>- white cold drink</dd>
-
-	</dl>
+	<cite>Цитата</cite><br><br>
+	
 
 <form>
-
 	             <label for="male">Male</label>
-
 	             <input type="radio" name="sex" id="male" />
-
 	             <br />
-
 	             <label for="female">Female</label>
-
 	             <input type="radio" name="sex" id="female" />
-
-	</form>
+</form><br>
 	
+<form>
+	           <fieldset>
+	             <legend>Personalia:</legend>
+	             Name: <input type="text" size="30" /><br />
+	             Email: <input type="text" size="30" /><br />
+	             Date of birth: <input type="text" size="10" />
+	           </fieldset>
+</form><br>
+
+<select>
+	                 <option>Volvo</option>
+	                 <option>Saab</option>
+	                 <option>Mercedes</option>
+	                 <option>Audi</option>
+</select><br><br>
+	 
+	 <table border="1">
+	    <caption>Monthly savings</caption>
+	    <tr>
+	      <th>Month</th>
+	      <th>Savings</th>
+	    </tr>
+	    <tr>
+	      <td>January</td>
+	      <td>$100</td>
+	    </tr>
+	</table><br>
+	
+	<blockquote>
+	Here is a long quotation here is a long  quotation here is a long quotation here is a long quotation here is a  long quotation here is a long quotation here is a long quotation here  is a long quotation here is a long quotation.   
+	</blockquote>
+
+ 
+Описание и использование:<br>
+Тег < blockquote > используется для определения длинных цитат.<br>
+<b>Браузер вставляет пространство и отступы до и после элемента blockquote.</b><br>
+<q>Совет: используйте тег q для коротких цитат.</q><br>
+	<dl>
+	  <dt>Coffee</dt>
+	    <dd>- black hot drink</dd>
+	  <dt>Milk</dt>
+	    <dd>- white cold drink</dd>
+	</dl>
+Описание и использование:<br>
+Тег < dt > создает термин в списке определений.<br>
+Тег < dt > используется вместе с < dl > (создает список определений) и < dd > (задает определение термина).<br><br>
+
+<button type="button">Click Me!</button>
+<p>Внутри элемента button Вы можете размещать контент (текст, изображения). В этом заключается разница между этим элементом и кнопками, созданными с помощью элемента input.
+Всегда указывайте атрибут type для кнопки. Значение по умолчанию атрибута type в Internet Explorer - "button", в других браузерах - "submit".
+Важно: Если Вы используете элемент button в HTML форме, разные браузеры обработают его по разному. Internet Explorer передаст текст между тегами < button> и < /button >, а другие браузеры - содержание атрибута "value". Используйте элемент input для создания кнопок в HTML форме.</p><br>
 </body>
